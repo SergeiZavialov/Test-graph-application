@@ -21,6 +21,7 @@ fun provideOkHttpClient() = OkHttpClient.Builder()
     .connectTimeout(10, TimeUnit.SECONDS)
     .addInterceptor(HeaderInterceptor())
     .addInterceptor(HttpLoggingInterceptor(AsyncHttpLogger()).setLevel(HttpLoggingInterceptor.Level.BODY))
+    .build()
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
     .baseUrl("http://80.211.168.161/")
