@@ -8,21 +8,19 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class MainViewModel(private val repository: Repository): ViewModel() {
+class MainViewModel(private val repository: Repository) : ViewModel() {
 
     private val _dataset = MutableStateFlow<List<DatasetRequest>?>(null)
     val dataset = _dataset.asStateFlow()
 
     fun getDataset() {
         viewModelScope.launch {
-            repository.getDataset()
-                .onStart { Timber.d("Loading started") }
-                .onCompletion { Timber.d("Loading stopped") }
+            repository.getFromOrLoadFileToCacheDir()
+                .onStart { Timber.d("Start Loading") }
+                .onCompletion { Timber.d("Stop Loading") }
                 .catch { Timber.e(it) }
                 .collect {
-                    if (it.isSuccessful) {
-                        _dataset.emit(it.body())
-                    }
+                    _dataset.emit(it)
                 }
         }
     }
