@@ -15,6 +15,7 @@
         android:theme="@style/Theme.TestGraphApplication">
         <activity
             android:name=".ui.MainActivity"
+            android:configChanges="orientation"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

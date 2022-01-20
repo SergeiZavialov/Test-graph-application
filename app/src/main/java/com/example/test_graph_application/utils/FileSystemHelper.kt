@@ -18,7 +18,7 @@ object FileSystemHelper {
         return fileDir?.absolutePath ?: ""
     }
 
-    fun writeFile(fileName: String?, stream: InputStream?) {
+    fun writeFile(fileName: String, stream: InputStream?) {
         val fos = FileOutputStream(File(fileName))
         val buffer = ByteArray(1024)
         var length: Int
@@ -36,7 +36,7 @@ object FileSystemHelper {
         }
     }
 
-    fun checkAndDeleteOldFile(path: String?, maxCount: Int) {
+    fun checkAndDeleteOldFile(path: String, maxCount: Int) {
         val directory = File(path)
         val files: Array<File> = directory.listFiles() ?: arrayOf()
         val listFiles: ArrayList<Pair<Date, File>> = ArrayList()
